@@ -79,8 +79,9 @@ function handleResponse (response, options) {
 async function run (endPoint, query, options, type, got) {
   try {
     if (!['query', 'mutation'].includes(type)) throw new Error('Query type must be either `query` or `mutation`')
+    if (!headers) headers = {}
 
-    const logger = new Logger(options) // Instantiate logger to log messages
+    const logger = new Logger(options.debug) // Instantiate logger to log messages
 
     logger.log(`Parsing query: ${JSON.stringify(query)}`)
     const graphQuery = parse(query, type) // Parses JSON into GraphQL Query
